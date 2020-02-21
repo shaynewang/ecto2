@@ -17,8 +17,8 @@ class BTController():
     self.steering_pub.publish(steering_cmd)
     throttle_cmd = joy_msg.axes[rospy.get_param("LEFT_JOY_UD")]
     self.throttle_pub.publish(throttle_cmd)
-    breaking_cmd= joy_msg.axes[rospy.get_param("B")] or joy_msg.axes[rospy.get_param("LT")]
-    self.throttle_pub.publish(breaking_cmd)
+    breaking_cmd= joy_msg.buttons[rospy.get_param("B")]
+    self.breaking_pub.publish(breaking_cmd)
 
 def start():
   rospy.init_node('bt_controller')
