@@ -13,11 +13,11 @@ class BTController():
     self.breaking_pub = rospy.Publisher('ecto2/breaking', Float64, queue_size=1) 
 
   def joyCallback(self, joy_msg):
-    steering_cmd = joy_msg.axes[rospy.get_param("LEFT_JOY_LR")]
+    steering_cmd = joy_msg.axes[rospy.get_param("~LEFT_JOY_LR")]
     self.steering_pub.publish(steering_cmd)
-    throttle_cmd = joy_msg.axes[rospy.get_param("LEFT_JOY_UD")]
+    throttle_cmd = joy_msg.axes[rospy.get_param("~LEFT_JOY_UD")]
     self.throttle_pub.publish(throttle_cmd)
-    breaking_cmd= joy_msg.buttons[rospy.get_param("B")]
+    breaking_cmd= joy_msg.buttons[rospy.get_param("~B")]
     self.breaking_pub.publish(breaking_cmd)
 
 def start():

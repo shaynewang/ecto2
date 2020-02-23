@@ -1,6 +1,6 @@
 import time
 import serial
-import RPi.GPIO as GPIO
+import Jetson.GPIO as GPIO
 import threading
 from adafruit_servokit import ServoKit
 
@@ -11,12 +11,14 @@ print("test esc")
 running = False
 ESC.throttle = 0
 
-port = serial.Serial("/dev/ttyAMA0", baudrate=9600,timeout=0.5)
+port = serial.Serial("/dev/ttyTHS1", baudrate=115200,
+                     bytesize=8, parity='N',
+                     stopbits=1, timeout=0.5)
 
 def heartbeat():
   while True:
     port.write(b'A')
-    time.sleep(0.5)
+    time.sleep(0.1)
 
 # Start heartbeat
 heartbeat = threading.Thread(target=heartbeat)
