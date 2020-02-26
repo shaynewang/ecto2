@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
-import rospy
+import rclpy
+from rclpy.node import Node
 from adafruit_servokit import ServoKit
 from std_msgs.msg import Float64
 
@@ -10,20 +11,20 @@ def mapToOutputRange(x, x_min, x_max, y_min, y_max):
     raise("not in range")
   return y_min + (x - x_min) * ((y_max - y_min)/(x_max - x_min))
 
-class Actuator():
+class Actuator(Node):
   def __init__(self):
-    control_num_channels = get_param("/ecto2/pca9685/num_channels")
-    steering_servo_ch = get_param("/ecto2/pca9685/steering_servo_ch")
-    esc_ch = get_param("/ecto2/pca9685/esc_ch")
+    control_num_channels = self.get_parameter("/ecto2/pca9685/num_channels").value
+    steering_servo_ch = self.get_parameter("/ecto2/pca9685/steering_servo_ch").value
+    esc_ch = self.get_parameter("/ecto2/pca9685/esc_ch").value
     kit = ServoKit(channels=control_num_channels)
     self.steering_servo = kit.servo[steering_servo_ch]
     self.esc = kit.continuous_servo[esc_ch]
-    self.steering_min = get_param("/ecto2/pca9685/steering_min")
-    self.steering_max = get_param("/ecto2/pca9685/steering_max")
-    self.steering_center = get_param("/ecto2/pca9685/steering_center")
-    self.steering_sub = rospy.Subscriber("ecto2/steering", Float64, self.steeringCallBack)
-    self.throttle_sub = rospy.Subscriber("ecto2/throttle", Float64, self.throttleCallBack)
-    self.breaking_sub = rospy.Subscriber("ecto2/breaking", Float64, self.breakingCallBack)
+    self.steering_min = self.get_parameter("/ecto2/pca9685/steering_min").value
+    self.steering_max = self.get_parameter("/ecto2/pca9685/steering_max").value
+    self.steering_center = self.get_parameter("/ecto2/pca9685/steering_center").value
+    self.steering_sub = self.create_subscription(Float64, "ecto2/steering", self.steeringCallBack)
+    self.throttle_sub = self.create_subscription(Float64, "ecto2/throttle", self.throttleCallBack)
+    self.breaking_sub = self.create_subscription(Float64, "ecto2/breaking", self.breakingCallBack)
 
   def steeringCallBack(self, steering):
     if steering == 0.0:
@@ -40,6 +41,8 @@ class Actuator():
     pass
 
 if __name__ == "__main__":
-  rospy.init_node('actuator')
-  Actuator()
-  rospy.spin()
+  rclpy.init(args=args)
+  actuator = Actuator()
+  rclpy.spin(actuator)
+  actuator.destory_node()
+  rclpy.shutdown()
