@@ -4,7 +4,6 @@ import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Joy
 from std_msgs.msg import Float64
-from actionlib_msgs.msg import GoalID
 
 class BTController(Node):
   def __init__(self):

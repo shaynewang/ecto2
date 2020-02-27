@@ -6,6 +6,12 @@
   </description>
   <maintainer email="shaynexwang@gmail.com">Shayne Wang</maintainer>
   <license>MIT</license>
-  <exec_depend>rclpy</exec_depend>
-  <exec_depend>std_msgs</exec_depend>
+  <depend>joy</depend>
+  <depend>rclpy</depend>
+  <depend>std_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
 </package>
+
