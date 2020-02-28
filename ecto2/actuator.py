@@ -13,15 +13,20 @@ def mapToOutputRange(x, x_min, x_max, y_min, y_max):
 
 class Actuator(Node):
   def __init__(self):
-    control_num_channels = self.get_parameter("/ecto2/pca9685/num_channels").value
-    steering_servo_ch = self.get_parameter("/ecto2/pca9685/steering_servo_ch").value
-    esc_ch = self.get_parameter("/ecto2/pca9685/esc_ch").value
+    super().__init__("Actuator")
+    print(self._parameters.keys())
+    ppp = [parameter for parameter in self._parameters.values()]
+    for p in ppp:
+        print(p)
+    control_num_channels = self.get_parameter("num_channels").value
+    steering_servo_ch = self.get_parameter("steering_servo_ch").value
+    esc_ch = self.get_parameter("esc_ch").value
     kit = ServoKit(channels=control_num_channels)
     self.steering_servo = kit.servo[steering_servo_ch]
     self.esc = kit.continuous_servo[esc_ch]
-    self.steering_min = self.get_parameter("/ecto2/pca9685/steering_min").value
-    self.steering_max = self.get_parameter("/ecto2/pca9685/steering_max").value
-    self.steering_center = self.get_parameter("/ecto2/pca9685/steering_center").value
+    self.steering_min = self.get_parameter("steering_min").value
+    self.steering_max = self.get_parameter("steering_max").value
+    self.steering_center = self.get_parameter("steering_center").value
     self.steering_sub = self.create_subscription(Float64, "ecto2/steering", self.steeringCallBack)
     self.throttle_sub = self.create_subscription(Float64, "ecto2/throttle", self.throttleCallBack)
     self.breaking_sub = self.create_subscription(Float64, "ecto2/breaking", self.breakingCallBack)
@@ -40,9 +45,12 @@ class Actuator(Node):
   def breakingCallBack(self, breaking):
     pass
 
-if __name__ == "__main__":
+def main(args=None):
   rclpy.init(args=args)
   actuator = Actuator()
   rclpy.spin(actuator)
   actuator.destory_node()
   rclpy.shutdown()
+
+if __name__ == "__main__":
+    main()

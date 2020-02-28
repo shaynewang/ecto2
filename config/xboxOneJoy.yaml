@@ -1,20 +1,22 @@
 # Button name to buttons index mapping
-A: 0
-B: 1
-X: 3
-Y: 4
-LB: 6
-RB: 7
-MENU: 11
-LEFT_JOY_PRESS: 13
-RIGHT_JOY_PRESS: 14
+ecto2:
+  ros__parameters:
+        A: 0
+        B: 1
+        X: 3
+        Y: 4
+        LB: 6
+        RB: 7
+        MENU: 11
+        LEFT_JOY_PRESS: 13
+        RIGHT_JOY_PRESS: 14
 
-# Control name to axis index mapping
-LEFT_JOY_LR: 0
-LEFT_JOY_UD: 1
-RIGHT_JOY_LR: 2
-RIGHT_JOY_UD: 3
-RT: 4
-LT: 5
-D_PAD_LR: 6
-D_PAD_UD: 7
+        # Control name to axis index mapping
+        LEFT_JOY_LR: 0
+        LEFT_JOY_UD: 1
+        RIGHT_JOY_LR: 2
+        RIGHT_JOY_UD: 3
+        RT: 4
+        LT: 5
+        D_PAD_LR: 6
+        D_PAD_UD: 7
