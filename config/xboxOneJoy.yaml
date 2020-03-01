@@ -3,13 +3,14 @@
   ros__parameters:
         A: 0
         B: 1
-        X: 3
-        Y: 4
-        LB: 6
-        RB: 7
-        MENU: 11
-        LEFT_JOY_PRESS: 13
-        RIGHT_JOY_PRESS: 14
+        X: 2
+        Y: 3
+        LB: 4
+        RB: 5
+        HOME: 6
+        MENU: 7
+        LEFT_JOY_PRESS: 8
+        RIGHT_JOY_PRESS: 9
 
         # Control name to axis index mapping
         LEFT_JOY_LR: 0
