@@ -1,9 +1,0 @@
-# PCA9685 configurations
-ecto2:
-  ros__parameters:
-        num_channels: 16
-        steering_servo_ch: 0
-        esc_ch: 1
-        steering_center: 104
-        steering_min: 68
-        steering_max: 154

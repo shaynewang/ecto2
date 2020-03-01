@@ -8,6 +8,12 @@ def generate_launch_description():
 
     return LaunchDescription([
         Node(
+            package='joy',
+            node_executable='joy_node',
+            node_name='joy_node',
+            output="screen",
+        ),
+        Node(
             package='ecto2',
             node_executable='bt_controller',
             node_name='bt_controller',
@@ -21,7 +27,6 @@ def generate_launch_description():
             node_executable='actuator',
             node_name='actuator',
             parameters=[
-              parameters_file_path + "/ecto2/pca9685.yaml"
             ],
             output="screen",
         ),

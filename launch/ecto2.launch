@@ -1,8 +1,0 @@
-<launch>
-  <node name="bt_controller" pkg="ecto2" type="bt_controller.py" respawn="true">
-    <rosparam command="load" file="$(find ecto2)/config/xboxOneJoy.yaml"/>
-  </node>
-  <node name="actuator" pkg="ecto2" type="actuator.py" respawn="true">
-    <rosparam command="load" file="$(find ecto2)/config/pca9685.yaml"/>
-  </node>
-</launch>

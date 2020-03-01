@@ -1,8 +1,0 @@
-<launch>
-  <node node-name="bt_controller" pkg="ecto2" exec="bt_controller.py">
-    <param from="$(find ecto2)/config/xboxOneJoy.yaml"/>
-  </node>
-  <node node-name="actuator" pkg="ecto2" exec="actuator.py">
-    <param from="$(find ecto2)/config/pca9685.yaml"/>
-  </node>
-</launch>

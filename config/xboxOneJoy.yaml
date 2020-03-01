@@ -1,5 +1,5 @@
 # Button name to buttons index mapping
-ecto2:
+/bt_controller:
   ros__parameters:
         A: 0
         B: 1
