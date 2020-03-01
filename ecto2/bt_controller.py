@@ -14,16 +14,16 @@ class BTController(Node):
     )
     self.joy_sub = self.create_subscription(Joy, "joy", self.joyCallback, 1)
 
-    self.steering_pub = self.create_publisher(Float64, 'ecto2/steering', 1) 
-    self.throttle_pub = self.create_publisher(Float64, 'ecto2/throttle', 1) 
+    self.steering_pub = self.create_publisher(Int32, 'ecto2/steering', 1) 
+    self.throttle_pub = self.create_publisher(Int32, 'ecto2/throttle', 1) 
     self.breaking_pub = self.create_publisher(Int32, 'ecto2/breaking', 1) 
 
   def joyCallback(self, joy_msg):
-    msg = Float64()
+    msg = Int32()
     button_msg = Int32()
 
     steering_cmd = joy_msg.axes[self.get_parameter("LEFT_JOY_LR").value]
-    msg.data = 100*(steering_cmd)
+    msg.data = int(100*(steering_cmd))
     #self.get_logger().info('Publishing: "%s"' % msg.data)
     self.steering_pub.publish(msg)
 
@@ -34,7 +34,7 @@ class BTController(Node):
 
     lt_val = joy_msg.axes[self.get_parameter("LT").value]
     rt_val = joy_msg.axes[self.get_parameter("RT").value]
-    msg.data = 100*(lt_val - rt_val)
+    msg.data = int(100*(lt_val - rt_val))
     self.throttle_pub.publish(msg)
 
     breaking_cmd= joy_msg.buttons[self.get_parameter("B").value]

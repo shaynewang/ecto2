@@ -13,7 +13,7 @@ First byte defines command type. The next 4 bytes is an Int32 value for the comm
 
 ```
 +-----------------+
-|com\_type|value  |
+|com_type|value  |
 +-----------------+
 |1 byte   |4 byte |
 +-----------------+
