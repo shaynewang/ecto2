@@ -11,11 +11,13 @@ Simple serial communication between arduino and the actuator. Will make it work 
 ### Message
 First byte defines command type. The next 4 bytes is an Int32 value for the command.
 
+```
 +-----------------+
 |com\_type|value  |
 +-----------------+
 |1 byte   |4 byte |
 +-----------------+
+```
 
 ## Notes
 ### Pi camera permission problem
