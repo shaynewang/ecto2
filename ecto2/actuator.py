@@ -2,8 +2,8 @@
 
 import rclpy
 from rclpy.node import Node
-from std_msgs.msg import Float64
 from std_msgs.msg import Int32
+from std_msgs.msg import Int32MultiArray
 from ecto2.ecto_serial import EctoSerial
 
 def mapToOutputRange(x, x_min, x_max, y_min, y_max):
@@ -14,8 +14,8 @@ def mapToOutputRange(x, x_min, x_max, y_min, y_max):
 
 class Actuator(Node):
   comm = {
-          "steering": chr(1),
-          "throttle": chr(2),
+          "steering": 0,
+          "throttle": 1,
           } 
 
   def __init__(self):
@@ -24,26 +24,19 @@ class Actuator(Node):
             automatically_declare_parameters_from_overrides=True,
     )
     # Initialize publiser and subscriber
-    self.steering_sub = self.create_subscription(Int32, "ecto2/steering", self.steeringCallBack)
-    self.throttle_sub = self.create_subscription(Int32, "ecto2/throttle", self.throttleCallBack)
+    self.steering_sub = self.create_subscription(Int32MultiArray, "ecto2/command", self.commandCallBack)
     self.breaking_sub = self.create_subscription(Int32, "ecto2/breaking", self.breakingCallBack)
 
     self.serial = EctoSerial(port='/dev/ttyUSB0', baudrate=115200)
 
-  def steeringCallBack(self, steering):
-    print("Steering: " + str(steering))
-    msg = [{self.comm["steering"]: steering.data}]
+  def commandCallBack(self, command):
+#    print("Steering: " + str(steering))
+    msg = (command.data[0], command.data[1])
     self.serial.send(msg)
-    
-  def throttleCallBack(self, throttle):
-    print("Throttle: " + str(throttle))
-    msg = [{self.comm["throttle"]: throttle.data}]
-    self.serial.send(msg)
+    self.serial.recv()
 
   def breakingCallBack(self, breaking):
-    print("Breaking: " + str(breaking))
-    msg = [{self.comm["throttle"]: 0},
-           {self.comm["steering"]: 0}]
+    msg = (0, 0)
     self.serial.send(msg)
 
 def main(args=None):

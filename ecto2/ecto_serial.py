@@ -5,23 +5,29 @@ class EctoSerial():
     def __init__(self, port, baudrate):
         self.port = port
         self.baudrate = baudrate
+        self.last_sent = None
 
-    def send(self, msg):
+    def send(self, data):
         """
         Args:
-            msg: list [
-                {'command1': Int32},
-                {'command2': Int32},
-                ...
-            ]
+            data: tuple (val1, val2)
         """
         with serial.Serial(
                 self.port, self.baudrate, 
                 bytesize=8, parity="N", stopbits=1) as ser:
-            for d in msg:
-                for command, val in d.items():
-                    ser.write(command.encode())
-                    ser.write(struct.pack("<i", val))
+            d1 = str(data[0])
+            d2 = str(data[1])
+            d1 = struct.pack("<i", data[0])
+            d2 = struct.pack("<i", data[1])
+            msg = b"<"+d1+b":"+d2+b">"
+#            msg = msg.encode()
+            if self.last_sent != msg:
+              print(msg)
+              print(ser.write(msg))
+              self.last_sent = msg
 
     def recv(self):
-        pass
+        with serial.Serial(
+                self.port, self.baudrate, 
+                bytesize=8, parity="N", stopbits=1,timeout=1) as ser:
+            print("recv: ", ser.readline())
