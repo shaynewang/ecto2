@@ -33,12 +33,10 @@ class Actuator(Node):
   def commandCallBack(self, command):
     msg = (command.data[0], command.data[1])
     self.serial.send(msg)
-    time.sleep(0.05)
+    time.sleep(0.01)
 
   def breakingCallBack(self, breaking):
-    msg = (0, 0)
-    self.serial.send(msg)
-    time.sleep(0.01)
+    pass
 
 def main(args=None):
   rclpy.init(args=args)
