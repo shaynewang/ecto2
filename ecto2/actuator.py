@@ -33,7 +33,6 @@ class Actuator(Node):
   def commandCallBack(self, command):
     msg = (command.data[0], command.data[1])
     self.serial.send(msg)
-    time.sleep(0.01)
 
   def breakingCallBack(self, breaking):
     pass
