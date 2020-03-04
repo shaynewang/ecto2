@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import rclpy
+import time
 from rclpy.node import Node
 from std_msgs.msg import Int32
 from std_msgs.msg import Int32MultiArray
@@ -30,14 +31,14 @@ class Actuator(Node):
     self.serial = EctoSerial(port='/dev/ttyUSB0', baudrate=115200)
 
   def commandCallBack(self, command):
-#    print("Steering: " + str(steering))
     msg = (command.data[0], command.data[1])
     self.serial.send(msg)
-    self.serial.recv()
+    time.sleep(0.05)
 
   def breakingCallBack(self, breaking):
     msg = (0, 0)
     self.serial.send(msg)
+    time.sleep(0.01)
 
 def main(args=None):
   rclpy.init(args=args)

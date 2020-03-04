@@ -6,6 +6,12 @@ from sensor_msgs.msg import Joy
 from std_msgs.msg import Int32
 from std_msgs.msg import Int32MultiArray
 
+def roundUp(number, n):
+    if number == 0: return 0
+    if number < 0:
+        return int((number - n + 1)/n) * n
+    return int((number + n -1)/n) * n
+
 class BTController(Node):
   def __init__(self):
     super().__init__(
@@ -22,11 +28,11 @@ class BTController(Node):
     button_msg = Int32()
 
     steering_cmd = joy_msg.axes[self.get_parameter("LEFT_JOY_LR").value]
-    com_data[0] = int(100*(steering_cmd))
+    com_data[0] = roundUp(int(100*(steering_cmd)), 10)
 
     lt_val = joy_msg.axes[self.get_parameter("LT").value]
     rt_val = joy_msg.axes[self.get_parameter("RT").value]
-    com_data[1] = int(100*(lt_val - rt_val))
+    com_data[1] = roundUp(int(100*(lt_val - rt_val)), 10)
     msg = Int32MultiArray(data=com_data)
     self.command_pub.publish(msg)
 
