@@ -12,9 +12,11 @@ SoftwareSerial mySerial(10,11);
 #define SERVOMIN  315 // This is the 'minimum' pulse length count (out of 4096)
 #define SERVOMAX  510 // This is the 'maximum' pulse length count (out of 4096)
 
-#define ESCMIN 370 // 370 - 440 reverse
+#define ESC_R_MIN 370 // 370 - 440 reverse
+#define ESC_R_MAX 440
 #define ESCNEU 450 // neutral
-#define ESCMAX 645 // 465 - 645 forward
+#define ESC_F_MIN 465
+#define ESC_F_MAX 645 // 465 - 645 forward
 
 #define BAUD 115200
 
@@ -44,9 +46,9 @@ int getPulseLength(int steering){
 int getSpeed(int throttle) {
   int tmp_speed = ESCNEU;
   if (throttle > 0) {
-    tmp_speed = map(throttle, 1, 200, ESCNEU, ESCMAX);
+    tmp_speed = map(throttle, 1, 200, ESC_F_MIN, ESC_F_MAX);
   } else if (throttle < 0) {
-    tmp_speed = map(throttle, -200, -1, ESCMIN, ESCNEU);
+    tmp_speed = map(throttle, -200, -1, ESC_R_MIN, ESC_R_MAX);
   }
   return tmp_speed;
 }
