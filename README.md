@@ -1,5 +1,9 @@
 # Ecto-2
 
+## Pairing Xbox One controller
+
+Follow https://approxeng.github.io/approxeng.input/bluetooth.html
+
 ## Run the program
 ```
  $ ros2 launch ecto2 ecto2.launch.py
