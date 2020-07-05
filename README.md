@@ -1,4 +1,5 @@
 # Ecto-2
+It's nothing like the [Ecto-1](https://ghostbusters.fandom.com/wiki/Ecto-1) but one day it will drive itself.
 
 ## Pairing Xbox One controller
 
