@@ -1,6 +1,8 @@
 # Ecto-2
 It's nothing like the [Ecto-1](https://ghostbusters.fandom.com/wiki/Ecto-1) but one day it will drive itself.
 
+Currently it's controlled by an Xbox One Controller. 
+
 ## Pairing Xbox One controller
 
 Follow https://approxeng.github.io/approxeng.input/bluetooth.html
