@@ -1,0 +1,22 @@
+buttons index map to Button
+0, A
+1, B
+3, X
+4, Y
+6, LB
+7, RB
+11, burger
+13, left joy down
+14, right joy down
+
+Index Axis name on the actual controller
+0 Left/Right Axis stick left
+1 Up/Down Axis stick left
+2 Left/Right Axis stick right
+3 Up/Down Axis stick right
+4 RT
+5 LT
+6 cross key left/right
+7 cross key up/down
+
+use rosparam to load .yaml  file where action and button mapping is configured

@@ -1,5 +1,3 @@
-#include <SoftwareSerial.h>
-
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
 
@@ -9,7 +7,6 @@
 
 // called this way, it uses the default address 0x40
 Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
-SoftwareSerial mySerial(10,11);
 #define SERVO_FREQ 60 // Analog servos run at ~50 Hz updates
 
 
@@ -32,10 +29,10 @@ const uint64_t address = 0xE6E6E648E6E6; // Unique address both transmitter and 
 
 void setup() {
   Serial.begin(BAUD, SERIAL_8N1);
-  mySerial.begin(BAUD);
   
   radio.begin();
   radio.openReadingPipe(0, address);
+  //radio.setDataRate(RF24_250KBPS);
   radio.setPALevel(RF24_PA_LOW);
   radio.startListening();
 
