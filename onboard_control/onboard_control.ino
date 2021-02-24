@@ -32,8 +32,8 @@ void setup() {
   
   radio.begin();
   radio.openReadingPipe(0, address);
-  //radio.setDataRate(RF24_250KBPS);
-  radio.setPALevel(RF24_PA_LOW);
+  radio.setDataRate(RF24_250KBPS);
+  radio.setPALevel(RF24_PA_MAX);
   radio.startListening();
 
   pwm.begin();
