@@ -28,7 +28,7 @@ class Actuator(Node):
     self.steering_sub = self.create_subscription(Int32MultiArray, "ecto2/command", self.commandCallBack)
     self.breaking_sub = self.create_subscription(Int32, "ecto2/breaking", self.breakingCallBack)
 
-    self.serial = EctoSerial(port='/dev/ttyUSB0', baudrate=115200)
+    self.serial = EctoSerial(port='/dev/ttyACM0', baudrate=115200)
 
   def commandCallBack(self, command):
     msg = (command.data[0], command.data[1])

@@ -10,7 +10,7 @@ setup (
     maintainer='Shayne Wang',
     maintainer_email='shaynexwang@gmail.com',
     description='Ecto2 with ROS2',
-    packages=find_packages(),
+    packages=[package_name],
     data_files=[
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
