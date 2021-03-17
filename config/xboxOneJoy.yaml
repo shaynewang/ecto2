@@ -21,3 +21,6 @@
         LT: 5
         D_PAD_LR: 6
         D_PAD_UD: 7
+/joy:
+  ros__parameters:
+        dev: /dev/input/js4
