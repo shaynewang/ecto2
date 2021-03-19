@@ -95,6 +95,7 @@ int getMsg(int msg[]){
 
 void loop() {
     int msg [2]= {0,0};
+    int err = getMsg(msg);
     int err = getRadioMsg(msg);
     if (!err) {
       pwm.setPWM(STEER_CH, 0, getSteering(msg[0])); //Set steering
